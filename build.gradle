@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.lwjgl.org/' }  // Важно для LWJGL 2.x
+}
+
+dependencies {
+    implementation "org.lwjgl.lwjgl:lwjgl:2.9.3"
+    implementation "org.lwjgl.lwjgl:lwjgl_util:2.9.3"
+    // Нативные библиотеки подтянутся автоматически из папки natives
+}
+
+// Указываем путь к DLL
+tasks.withType(JavaExec) {
+    systemProperty "org.lwjgl.librarypath", file("src/main/resources/lwjgl-2.9.3").absolutePath
+}
